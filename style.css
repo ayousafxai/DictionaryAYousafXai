@@ -1,0 +1,296 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #fffaf3;
+  color: #2d2d2d;
+  transition: all 0.3s;
+}
+
+.dark {
+  background: #1c1c1c;
+  color: #f5f5f5;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(to right, #f37335, #fdc830);
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.navbar button {
+  background: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.dark .navbar {
+  background: #333;
+}
+
+.tab {
+  display: none;
+  padding: 1rem;
+}
+
+.tab.active {
+  display: block;
+}
+
+.search-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 2px solid #ff8800;
+}
+
+button {
+  border: none;
+  padding: 0.7rem 1rem;
+  background: #ff8800;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#resultBox, .history, #synonymsBox, #favoritesList {
+  background: #ffe9d6;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.dark #resultBox, .dark .history, .dark #synonymsBox, .dark #favoritesList {
+  background: #292929;
+}
+
+
+/* Mic icon placement and Google-style bar */
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.search-box input[type="text"] {
+  flex: 1;
+  border-radius: 50px;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #ff8800;
+  font-size: 1rem;
+  max-width: 500px;
+}
+
+.search-box .mic-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: -3.5rem;
+  transform: translateY(0.1rem);
+}
+
+/* Toggle switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider.round {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider.round {
+  background-color: #ff8800;
+}
+
+input:checked + .slider.round:before {
+  transform: translateX(24px);
+}
+
+
+/* Enhanced History and Favorites styling */
+#historyList, #favoritesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+#historyList div, #favoritesList div {
+  background: rgba(255, 136, 0, 0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+#historyList div:hover, #favoritesList div:hover {
+  background: rgba(255, 136, 0, 0.2);
+  transform: translateY(-2px);
+  border-color: #ff8800;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Enhanced theme colors and effects */
+.dark #historyList div, .dark #favoritesList div {
+  background: rgba(255, 136, 0, 0.05);
+  color: #f5f5f5;
+}
+
+.dark #historyList div:hover, .dark #favoritesList div:hover {
+  background: rgba(255, 136, 0, 0.1);
+}
+
+/* Pronunciation box styling */
+.pronunciation-box {
+  background: rgba(255, 136, 0, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+
+.phonetic-text {
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #ff8800;
+}
+
+.audio-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Word grid styling */
+.word-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.word-item {
+  background: rgba(255, 136, 0, 0.1);
+  padding: 0.6rem;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.word-item:hover {
+  background: rgba(255, 136, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.dark .word-item {
+  background: rgba(255, 136, 0, 0.05);
+}
+
+.dark .word-item:hover {
+  background: rgba(255, 136, 0, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .navbar button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input[type="text"] {
+    max-width: none;
+    width: 100%;
+  }
+
+  .search-box .mic-icon {
+    position: absolute;
+    right: 2rem;
+  }
+
+  #historyList, #favoritesList {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .word-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .pronunciation-box, .meaning-box {
+    padding: 0.8rem;
+  }
+
+  .phonetic-text {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search-box input[type="text"] {
+    max-width: 800px;
+  }
+
+  #historyList, #favoritesList {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .word-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}

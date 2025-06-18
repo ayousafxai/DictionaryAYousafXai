@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ff8800" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>English Dictionary</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <button onclick="switchTab('dictionary')">📘 Dictionary</button>
+    <button onclick="switchTab('synonyms')">🔁 Synonyms/Antonyms</button>
+    <button onclick="switchTab('favorites')">⭐ Favorite Words</button>
+    <button onclick="switchTab('history')">🕘 History</button>
+    <label class="toggle-switch">
+      <input type="checkbox" onchange="toggleTheme()" id="themeToggle">
+      <span class="slider round"></span>
+    </label>
+  </nav>
+
+  <main>
+    <section id="dictionaryTab" class="tab active">
+      <div class="search-box">
+        <input type="text" id="wordInput" placeholder="Search for a word..." />
+        <div class="mic-icon" onclick="startVoiceSearch()">🎙️</div>
+        <button onclick="searchWord()">Search</button>
+      </div>
+      <div id="resultBox"></div>
+    </section>
+
+    <section id="synonymsTab" class="tab">
+      <div class="search-box">
+        <input type="text" id="synonymInput" placeholder="Search word for synonyms..." />
+        <div class="mic-icon" onclick="startSynonymVoiceSearch()">🎙️</div>
+        <button onclick="searchSynonyms()">Search</button>
+      </div>
+      <div id="synonymsBox"></div>
+    </section>
+
+    <section id="favoritesTab" class="tab">
+      <h2>Favorite Words</h2>
+      <div id="favoritesList"></div>
+    </section>
+
+    <section id="historyTab" class="tab">
+      <h2>Search History</h2>
+      <div id="historyList"></div>
+      <button onclick="exportHistory()">⬇️ Export History</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed:', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
