@@ -91,10 +91,24 @@ function switchTab(tab) {
     const tabs = ['dictionary', 'synonyms', 'favorites', 'history'];
     if (!tabs.includes(tab)) return;
     
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    const allTabs = document.querySelectorAll('.tab');
+    allTabs.forEach(t => {
+      if (t.classList.contains('active')) {
+        t.style.opacity = '0';
+        t.style.transform = 'translateY(20px)';
+        setTimeout(() => t.classList.remove('active'), 400);
+      }
+    });
+
     const targetTab = document.getElementById(tab + 'Tab');
     if (targetTab) {
-      targetTab.classList.add('active');
+      setTimeout(() => {
+        targetTab.classList.add('active');
+        requestAnimationFrame(() => {
+          targetTab.style.opacity = '1';
+          targetTab.style.transform = 'translateY(0)';
+        });
+      }, 400);
       currentTab = tab;
     }
   } catch (error) {
@@ -103,10 +117,16 @@ function switchTab(tab) {
 }
 
 function toggleTheme() {
-  document.body.classList.toggle('dark');
-  const isDark = document.body.classList.contains('dark');
+  const body = document.body;
+  body.style.transition = 'all 0.5s ease-in-out';
+  body.classList.toggle('dark');
+  const isDark = body.classList.contains('dark');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
   document.getElementById('themeToggle').checked = isDark;
+
+  // Animate all elements that change with theme
+  document.querySelectorAll('.tab, .word-item, #resultBox, #synonymsBox, #favoritesList, #historyList')
+    .forEach(el => el.style.transition = 'all 0.5s ease-in-out');
 }
 
 function loadTheme() {
@@ -218,6 +238,11 @@ function startVoiceSearch() {
     recognition.lang = 'en-US';
     recognition.continuous = false;
     recognition.interimResults = false;
+
+    // Add vibration feedback for mobile devices
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
 
     recognition.onstart = function() {
       document.querySelector('.mic-icon').style.color = '#ff8800';
